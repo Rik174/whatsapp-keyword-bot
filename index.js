@@ -30,46 +30,32 @@ client.on("ready", () => {
 
 // --- Основная логика ---
 client.on("message", async (msg) => {
-  try {
-    const chat = await msg.getChat();
-    if (chat.isGroup) {
-      const text = msg.body.toLowerCase();
-      const foundKeyword = KEYWORDS.find((kw) => text.includes(kw));
-      if (foundKeyword) {
-    console.log(`🚀 Найдено ключевое слово [${foundKeyword}] в "${chat.name}"`);
+    try {
+        const chat = await msg.getChat();
+        if (chat.isGroup) {
+            const text = msg.body.toLowerCase();
+            const foundKeyword = KEYWORDS.find((kw) => text.includes(kw));
+            if (foundKeyword) {
+                console.log(`🚀 Найдено ключевое слово [${foundKeyword}] в "${chat.name}"`);
 
-    if (msg.hasMedia) {
-        const media = await msg.downloadMedia();
-        await client.sendMessage(
-            TARGET_CONTACT,
-            `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body || ""}`,
-            { media }
-        );
-    } else {
-        await client.sendMessage(
-            TARGET_CONTACT,
-            `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body}`
-        );
-    }
-}
-        if (msg.hasMedia) {
-          const media = await msg.downloadMedia();
-          await client.sendMessage(
-            TARGET_CONTACT,
-            `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body || ""}`,
-            { media }
-          );
-        } else {
-          await client.sendMessage(
-            TARGET_CONTACT,
-            `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body}`
-          );
+                if (msg.hasMedia) {
+                    const media = await msg.downloadMedia();
+                    await client.sendMessage(
+                        TARGET_CONTACT,
+                        `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body || ""}`,
+                        { media }
+                    );
+                } else {
+                    await client.sendMessage(
+                        TARGET_CONTACT,
+                        `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body}`
+                    );
+                }
+            }
         }
-      }
+    } catch (error) {
+        console.error("⚠️ Ошибка при обработке сообщения:", error);
     }
-  } catch (error) {
-    console.error("⚠️ Ошибка при обработке сообщения:", error);
-  }
 });
 
 client.initialize();
