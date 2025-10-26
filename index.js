@@ -19,7 +19,7 @@ const TARGET_CONTACT = "971588479697@c.us";
 
 // --- Инициализация клиента ---
 const client = new Client({
-  authStrategy: new LocalAuth(), // сохраняет сессию (QR не нужно сканировать каждый раз)
+  authStrategy: new LocalAuth({ clientId: "fresh-session" }),
 });
   puppeteer: {
     headless: true,
