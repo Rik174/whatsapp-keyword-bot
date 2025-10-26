@@ -1,5 +1,11 @@
+import express from "express";
 import { Client, LocalAuth } from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
+
+// --- HTTP сервер для Render ---
+const app = express();
+app.get("/", (_, res) => res.send("✅ WhatsApp Keyword Bot работает на Render!"));
+app.listen(3000, () => console.log("🌍 Сервер запущен на порту 3000 (для Render)"))
 
 // --- Настройки ---
 const KEYWORDS = [
@@ -37,7 +43,7 @@ client.on("message", async (msg) => {
 
       if (foundKeyword) {
         console.log(`🚀 Найдено ключевое слово [${foundKeyword}] в "${chat.name}"`);
-        
+
         // Если есть медиа — скачиваем и пересылаем
         if (msg.hasMedia) {
           const media = await msg.downloadMedia();
