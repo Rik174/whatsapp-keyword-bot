@@ -17,7 +17,21 @@ const KEYWORDS = [
 const TARGET_CONTACT = "971588479697@c.us";
 
 // --- Инициализация клиента ---
-const client = new Client({ authStrategy: new LocalAuth() });
+const client = new Client({
+  authStrategy: new LocalAuth(),
+  puppeteer: {
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu",
+      "--no-first-run",
+      "--no-zygote",
+      "--single-process",
+    ],
+  },
+});
 let lastQr = null;
 // — получаем QR и запоминаем его —
 client.on("qr", (qr) => {
