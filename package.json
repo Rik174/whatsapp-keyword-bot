@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-keyword-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp бот, пересылающий сообщения с ключевыми словами указанному контакту",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.26.0"
+  }
+}
