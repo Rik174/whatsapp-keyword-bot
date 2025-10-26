@@ -19,10 +19,22 @@ const TARGET_CONTACT = "971588479697@c.us";
 // --- Инициализация клиента ---
 const client = new Client({ authStrategy: new LocalAuth() });
 
-client.on("qr", (qr) => {
-  console.log("📱 Отсканируй QR-код для входа в WhatsApp:");
-  qrcode.generate(qr, { small: true });
+// — получаем QR и запоминаем его —
+client.on("qr", qr => {
+  lastQr = qr;
+  console.log("QR обновлён — открой /qr и отсканируй с телефона");
 });
+
+// — HTTP эндпоинт для просмотра QR —
+app.get("/qr", async (req, res) => {
+  if (!lastQr) return res.status(404).send("QR ещё не готов");
+  const png = await qrcode.toBuffer(lastQr);
+  res.type("png").send(png);
+});
+
+app.listen(process.env.PORT || 3000, () =>
+  console.log("HTTP сервер запущен на порту", process.env.PORT || 3000)
+);
 
 client.on("ready", () => {
   console.log("✅ Бот успешно запущен и готов к работе!");
