@@ -1,5 +1,5 @@
 import express from "express";
-import qrcode from "qrcode-terminal";
+import qrcode from "qrcode";
 import pkg from "whatsapp-web.js";   // <-- новый импорт
 const { Client, LocalAuth } = pkg;  // <-- деструктуризация CommonJS
 
@@ -40,8 +40,6 @@ client.on("qr", (qr) => {
 });
 
 // — HTTP эндпоинт для просмотра QR —
-app.get("/qr", async (req, res) => {
-  if (!lastQr) return res.status(404).send("QR ещё не готов");
 app.get("/qr", async (req, res) => {
   if (!lastQr) return res.status(404).send("QR ещё не готов");
   try {
