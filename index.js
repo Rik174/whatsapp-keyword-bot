@@ -36,7 +36,22 @@ client.on("message", async (msg) => {
       const text = msg.body.toLowerCase();
       const foundKeyword = KEYWORDS.find((kw) => text.includes(kw));
       if (foundKeyword) {
-        console.log(🚀 Найдено ключевое слово [${foundKeyword}] в "${chat.name}");
+    console.log(🚀 Найдено ключевое слово [${foundKeyword}] в "${chat.name}");
+
+    if (msg.hasMedia) {
+        const media = await msg.downloadMedia();
+        await client.sendMessage(
+            TARGET_CONTACT,
+            📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body || ""},
+            { media }
+        );
+    } else {
+        await client.sendMessage(
+            TARGET_CONTACT,
+            📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body}
+        );
+    }
+}
         if (msg.hasMedia) {
           const media = await msg.downloadMedia();
           await client.sendMessage(
