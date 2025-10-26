@@ -42,7 +42,7 @@ client.on("message", async (msg) => {
         const media = await msg.downloadMedia();
         await client.sendMessage(
             TARGET_CONTACT,
-            📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body || ""},
+            `📩 Сообщение из группы "${chat.name}" с ключевым словом "${foundKeyword}":\n\n${msg.body || ""}`,
             { media }
         );
     } else {
