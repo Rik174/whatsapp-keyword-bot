@@ -18,11 +18,11 @@ const TARGET_CONTACT = "971588479697@c.us";
 
 // --- Инициализация клиента ---
 const client = new Client({ authStrategy: new LocalAuth() });
-
+let lastQr = null;
 // — получаем QR и запоминаем его —
-client.on("qr", qr => {
+client.on("qr", (qr) => {
   lastQr = qr;
-  console.log("QR обновлён — открой /qr и отсканируй с телефона");
+  console.log("QR обновлён — открой /qr и отсканируй");
 });
 
 // — HTTP эндпоинт для просмотра QR —
