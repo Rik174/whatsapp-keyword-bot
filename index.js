@@ -6,7 +6,9 @@ const { Client, LocalAuth } = pkg;  // <-- деструктуризация Comm
 // --- HTTP сервер для Render ---
 const app = express();
 app.get("/", (_, res) => res.send("✅ WhatsApp Keyword Bot работает на Render!"));
-
+app.listen(process.env.PORT || 3000, () =>
+  console.log("HTTP сервер запущен на порту", process.env.PORT || 3000)
+);
 // --- Настройки ---
 const KEYWORDS = [
   "освещение",
