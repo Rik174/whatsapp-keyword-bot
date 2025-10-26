@@ -42,8 +42,17 @@ client.on("qr", (qr) => {
 // — HTTP эндпоинт для просмотра QR —
 app.get("/qr", async (req, res) => {
   if (!lastQr) return res.status(404).send("QR ещё не готов");
-  const png = await qrcode.toBuffer(lastQr);
-  res.type("png").send(png);
+app.get("/qr", async (req, res) => {
+  if (!lastQr) return res.status(404).send("QR ещё не готов");
+  try {
+    const dataUrl = await qrcode.toDataURL(lastQr); // base64
+    const img = Buffer.from(dataUrl.split(",")[1], "base64");
+    res.set("Content-Type", "image/png");
+    res.send(img);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Ошибка генерации QR");
+  }
 });
 
 app.listen(process.env.PORT || 3000, () =>
