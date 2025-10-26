@@ -10,7 +10,7 @@ app.listen(3000, () => console.log("🌍 Сервер запущен на пор
 
 // --- Настройки ---
 const KEYWORDS = [
-  "срочно", "оплата", "важно", "доставка",
+  "освещение",
   "звук", "свет", "яркость", "громкость", "звучание",
   "мерцает", "не горит", "тише", "громче", "ярче", "тускло", "лампочки"
 ];
@@ -36,7 +36,7 @@ client.on("message", async (msg) => {
       const text = msg.body.toLowerCase();
       const foundKeyword = KEYWORDS.find((kw) => text.includes(kw));
       if (foundKeyword) {
-    console.log(🚀 Найдено ключевое слово [${foundKeyword}] в "${chat.name}");
+    console.log(Найдено ключевое слово [${foundKeyword}] в "${chat.name}");
 
     if (msg.hasMedia) {
         const media = await msg.downloadMedia();
