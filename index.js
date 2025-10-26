@@ -54,9 +54,6 @@ app.get("/qr", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000, () =>
-  console.log("HTTP сервер запущен на порту", process.env.PORT || 3000)
-);
 
 client.on("ready", () => {
   console.log("✅ Бот успешно запущен и готов к работе!");
